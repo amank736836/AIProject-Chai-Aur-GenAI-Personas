@@ -9,7 +9,7 @@
 | Area | Status | Basis |
 |---|---|---|
 | **Critical features** | ⚠ PARTIAL | Chat UI, persona switching, validation and avatars work; **custom persona (tone), prompt transparency and history restore are broken**, and the HiPi history is asymmetric |
-| **Critical bugs** | ❌ 1 open (BUG-017 dependencies) | `npm audit`: 1 critical + 4 high advisories in production deps, fix available (`next@15.5.27`) |
+| **Critical bugs** | ❌ 1 open (BUG-017 dependencies) | `npm audit`: 1 critical + 4 high advisories in production deps, fix available (`next@15.5.27`); GitHub/Dependabot reports 86 alerts on the default branch (4 critical) |
 | **Open high-severity bugs** | ❌ 7 | BUG-002, BUG-003, BUG-006, BUG-007, BUG-012, BUG-014, plus the critical BUG-017 |
 | **Regression status** | ✅ no regression observed | 35/35 executed assertions pass; 16 known-defect TODOs are documented and pre-existing |
 | **Smoke test status** | ⚠ PARTIAL | SCN-001/003/005/006/007 PASS; SCN-002 (HiPi happy path) and SCN-004 (error payload) not clean |
