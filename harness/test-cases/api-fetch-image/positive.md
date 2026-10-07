@@ -11,7 +11,7 @@
 | Steps | 1. `POST /api/fetch-image {"name":"Hitesh"}` 2. Inspect `image` |
 | Test Data | Inline — the concrete values are given in the steps (no external fixture) |
 | Expected Result | `200` with `image` matching `^https://`; a usable avatar (unsplash when reachable, otherwise a generated ui-avatars URL) |
-| Actual Result | `200 {"image":"https://ui-avatars.com/api/?name=Hitesh&background=…&size=128&font-family=…&rounded=…"}` (fallback path, p50 32 ms in `../../evidence/performance/performance-latency.md`) |
+| Actual Result | `200 {"image":"https://ui-avatars.com/api/?name=Hitesh&background=…&size=128&font-family=…&rounded=…"}` (fallback path, p50 32 ms in `../../evidence/performance/performance-latency.md`). The style parameters (`background`, `font-family`) are chosen randomly per request in `fetch-image/route.ts`, so successive evidence captures legitimately differ — only the host, `name=` and the `^https://` shape are asserted |
 | Status | PASS |
 | Automation | AUTOMATED |
 | Evidence | `../../evidence/api-responses/TC-023-fetch-image-ok.json` |
