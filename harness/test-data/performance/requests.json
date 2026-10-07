@@ -1,0 +1,56 @@
+{
+  "note": "Exact request shapes used by the latency probe (automation/performance/api-latency.mjs) so RUN baselines can be reproduced one-to-one.",
+  "base_url_default": "http://localhost:3000",
+  "iterations_default": 15,
+  "probes": [
+    {
+      "id": "page",
+      "label": "GET / (SSR shell)",
+      "method": "GET",
+      "path": "/",
+      "expected_status": 200,
+      "budget_p95_ms": 500,
+      "requirement": "NFR-007"
+    },
+    {
+      "id": "tone-data",
+      "label": "GET /data/hitesh-tone.json (static data, expected 404)",
+      "method": "GET",
+      "path": "/data/hitesh-tone.json",
+      "expected_status": 404,
+      "note": "the client fetch targets a non-existent path - BUG-005"
+    },
+    {
+      "id": "chat-validation",
+      "label": "POST /api/chat (validation error path)",
+      "method": "POST",
+      "path": "/api/chat",
+      "headers": { "Content-Type": "application/json" },
+      "body": {},
+      "expected_status": 400,
+      "budget_p95_ms": 200,
+      "requirement": "NFR-008"
+    },
+    {
+      "id": "fetch-image",
+      "label": "POST /api/fetch-image (name=Hitesh)",
+      "method": "POST",
+      "path": "/api/fetch-image",
+      "headers": { "Content-Type": "application/json" },
+      "body": { "name": "Hitesh" },
+      "expected_status": 200,
+      "note": "includes one outbound request per call in this environment (fallback path - BUG-018)"
+    },
+    {
+      "id": "create-persona-validation",
+      "label": "POST /api/create-persona (missing name)",
+      "method": "POST",
+      "path": "/api/create-persona",
+      "headers": { "Content-Type": "application/json" },
+      "body": {},
+      "expected_status": 400,
+      "budget_p95_ms": 200,
+      "requirement": "NFR-008"
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "$comment": "Bodies/requests that must be rejected or handled without crashing.",
+  "requests": [
+    { "case": "TC-001", "body": {}, "expected": "400 Message required" },
+    { "case": "TC-001", "body": { "message": "" }, "expected": "400 Message required" },
+    { "case": "TC-003", "body": { "message": "   " }, "expected": "400 Message required", "actual": "500 - validation gap (BUG-011)" },
+    { "case": "TC-002", "raw": "not-json", "expected": "400 with JSON error", "actual": "500 empty body (BUG-010)" },
+    { "case": "TC-002", "raw": "}", "expected": "400 with JSON error", "actual": "500 empty body (BUG-010)" },
+    { "case": "TC-024", "raw": "nope", "target": "/api/fetch-image", "expected": "400 with JSON error", "actual": "500 empty body (BUG-010)" },
+    { "case": "TC-004", "method": "GET", "expected": "405 Method Not Allowed" }
+  ]
+}

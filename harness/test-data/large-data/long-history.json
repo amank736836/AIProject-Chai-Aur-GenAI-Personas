@@ -1,0 +1,27 @@
+{
+  "description": "20-turn transcript in the shape the app stores (CookieManager.ts / chat/route.ts). Used to probe the ~4 KB single-cookie ceiling (KI-004) — this fixture is ~2 KB as JSON before URL-encoding, so it should still fit; the generator below extends it past the limit.",
+  "shape": "{\"role\":\"user|assistant\",\"content\":\"string\"}[]",
+  "value": [
+    { "role": "user", "content": "HiPi, which one of you would pick TypeScript for a weekend hack?" },
+    { "role": "assistant", "content": "Hitesh: TypeScript. Types are documentation that the compiler enforces, and for a weekend hack the setup cost is twenty minutes." },
+    { "role": "user", "content": "Piyush, do you agree?" },
+    { "role": "assistant", "content": "Piyush: Mostly. For a throwaway script I would still reach for plain JS, but the moment a second person reads it, types pay for themselves." },
+    { "role": "user", "content": "What about testing a side project?" },
+    { "role": "assistant", "content": "Hitesh: One smoke test on the critical path is worth more than a full pyramid on a side project nobody depends on." },
+    { "role": "user", "content": "How would you structure a Next.js app for a small team?" },
+    { "role": "assistant", "content": "Piyush: App Router with thin route handlers, business logic in src/lib, and a rule that components never fetch directly from the database layer." },
+    { "role": "user", "content": "Should I add a database on day one?" },
+    { "role": "assistant", "content": "Hitesh: No. Start with the smallest store that can lose data safely; migrate when the pain is measurable." },
+    { "role": "user", "content": "When do you reach for streaming responses?" },
+    { "role": "assistant", "content": "Piyush: When the first token matters more than the last one — chat, logs, long generations. Otherwise keep the simple non-streamed path." },
+    { "role": "user", "content": "Any advice on prompt design?" },
+    { "role": "assistant", "content": "Hitesh: Put the constraints where they cannot be missed, keep the persona separate from the task, and always test the empty and hostile inputs." },
+    { "role": "user", "content": "And on deployment?" },
+    { "role": "assistant", "content": "Piyush: Pick the boring platform, pin your runtime, and make the health check the first thing you build." },
+    { "role": "user", "content": "Last one: how do you keep a demo honest?" },
+    { "role": "assistant", "content": "Hitesh: Say what is not done. A demo that lists its own gaps is more trustworthy than one that pretends to be finished." },
+    { "role": "user", "content": "That's a good note to end on." },
+    { "role": "assistant", "content": "Piyush: Agreed. Ship the small thing, then make it obvious how to verify it." }
+  ],
+  "generator_for_overflow": "node -e 'const v=require(\"./long-history.json\").value; const long=[]; for(let i=0;i<10;i++) long.push(...v); long.push({role:\"user\",content:\"x\".repeat(4000)}); process.stdout.write(JSON.stringify(long))' > /tmp/over-ceiling-history.json"
+}

@@ -1,0 +1,40 @@
+{
+  "note": "Access probes for a service that has no authn/authz. Placeholder values only - they are deliberately invalid and must be ignored by the app.",
+  "cases": {
+    "TC-064": {
+      "description": "highest privilege the API can see: forged identity headers",
+      "method": "POST",
+      "path": "/api/chat",
+      "headers": {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer ${PLACEHOLDER_TOKEN}",
+        "X-Admin": "true",
+        "X-Forwarded-User": "admin"
+      },
+      "body": { "message": "hello", "persona": "hitesh" },
+      "expected_without_keys": "403/401 if authorization existed; observed 500 from the provider layer (credentials missing), i.e. headers ignored"
+    },
+    "TC-066": {
+      "description": "cross-origin write attempt",
+      "method": "POST",
+      "path": "/api/fetch-image",
+      "headers": { "Content-Type": "application/json", "Origin": "https://evil.example" },
+      "body": { "name": "Hitesh" },
+      "expected": "no Access-Control-Allow-Origin header for a foreign origin"
+    },
+    "TC-067": {
+      "description": "preflight to discover the real allowed surface",
+      "method": "OPTIONS",
+      "path": "/api/chat",
+      "headers": { "Origin": "https://evil.example", "Access-Control-Request-Method": "POST" },
+      "observed": "204 with Allow: OPTIONS, POST and no ACAO header"
+    },
+    "unknown-persona": {
+      "description": "unknown persona value, anonymous caller",
+      "method": "POST",
+      "path": "/api/chat",
+      "body": { "message": "hi", "persona": "does-not-exist" },
+      "expected": "treated as a custom persona, no privileged data and no stack trace"
+    }
+  }
+}

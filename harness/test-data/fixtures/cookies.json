@@ -1,0 +1,32 @@
+{
+  "$comment": "Cookie fixtures. Values are synthetic; no real session data. Encode with encodeURIComponent before use.",
+  "personaData-harness-reuse": {
+    "raw": { "name": "Harness Reuse", "tone": "PRESET-TONE-FROM-COOKIE" },
+    "used_by": "TC-021",
+    "expectation": "create-persona returns this tone without calling the provider"
+  },
+  "personaData-test-persona-object-tone": {
+    "cookie_name": "personaData-test-persona",
+    "raw": { "name": "Test Persona", "tone": { "systemPrompt": "CUSTOM-TONE-SYSTEM-PROMPT" } },
+    "used_by": "TC-031",
+    "expectation": "honoured by buildPrompt (object shape)"
+  },
+  "personaData-test-persona-string-tone": {
+    "cookie_name": "personaData-test-persona",
+    "raw": { "name": "Test Persona", "tone": "You are a friendly mentor who talks about chai." },
+    "used_by": "TC-032",
+    "expectation": "IGNORED today — this is exactly what /api/create-persona writes (BUG-006)"
+  },
+  "personaData-@amank736836": {
+    "cookie_name": "personaData-@amank736836",
+    "raw": { "name": "@amank736836", "tone": { "systemPrompt": "AT-HANDLE-TONE" } },
+    "used_by": "TC-033",
+    "expectation": "never found because chat/route.ts looks up personaData-amank736836 (BUG-007)"
+  },
+  "chatHistory-both": {
+    "cookie_name": "chatHistory-both",
+    "raw": [ { "role": "user", "content": "pehla sawaal" }, { "role": "assistant", "content": "pehla jawaab" } ],
+    "used_by": "TC-011, TC-063",
+    "expectation": "replayed as prompt context for HiPi"
+  }
+}

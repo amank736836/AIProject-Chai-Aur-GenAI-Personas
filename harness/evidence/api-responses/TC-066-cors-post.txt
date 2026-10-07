@@ -1,0 +1,2 @@
+status=400
+access-control-allow-origin=null
