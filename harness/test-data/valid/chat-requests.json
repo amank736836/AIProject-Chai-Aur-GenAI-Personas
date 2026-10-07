@@ -1,0 +1,12 @@
+{
+  "$comment": "Bodies that must be accepted. Provider-dependent ones only produce a reply when credentials exist.",
+  "requests": [
+    { "case": "TC-007", "body": { "message": "Say hi in one word", "persona": "hitesh" } },
+    { "case": "TC-009", "body": { "message": "Say hi in one word", "persona": "piyush" } },
+    { "case": "TC-008", "body": { "message": "Explain closures in one line", "persona": "both" } },
+    { "case": "TC-014", "body": { "message": "ping", "persona": "hitesh" }, "note": "used through the automation suite" },
+    { "case": "TC-011", "body": { "message": "hi", "persona": "test-persona", "customName": "Test Persona" } },
+    { "case": "TC-013", "body": { "message": "hi", "persona": "both", "customName": "" } },
+    { "case": "TC-047", "body": { "message": "hi", "persona": "hitesh", "debugPrompt": true } }
+  ]
+}

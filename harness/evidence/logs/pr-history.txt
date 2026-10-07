@@ -1,0 +1,15 @@
+3	Enhance UI with micro-interactions, animated backgrounds, and smoother transitions	arena/01a100a8-chai-aur-genai-personas-aiproj	MERGED	2026-10-03 07:36:18 +0000 UTC
+2	Fix React Server Components CVE vulnerabilities	vercel/react-server-components-cve-vu-ac48p1	MERGED	2026-01-01 07:19:01 +0000 UTC
+1	Bump next from 15.4.6 to 15.4.7 in the npm_and_yarn group across 1 directory	dependabot/npm_and_yarn/npm_and_yarn-2cb8645c2b	OPEN	2025-08-30 15:02:20 +0000 UTC
+
+## Repo meta (from `git push` remote output, 2026-10-07)
+
+```
+remote: GitHub found 86 vulnerabilities on amank736836/AIProject-Chai-Aur-GenAI-Personas's default branch
+remote: (4 critical, 45 high, 31 moderate, 6 low).
+remote: To find out more, visit: https://github.com/amank736836/AIProject-Chai-Aur-GenAI-Personas/security/dependabot
+```
+
+Interpretation: GitHub/Dependabot's view of the **default branch** (all workspaces + transitive resolutions, all
+severities) is broader than `npm audit --omit=dev` on this checkout (28 advisories total / 10 production, 1
+critical). Both point at the same fix direction recorded in BUG-017 (bump `next`, refresh the lockfile).

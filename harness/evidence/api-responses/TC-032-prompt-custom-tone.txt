@@ -1,0 +1,8 @@
+TC-032 evidence — tone produced by /api/create-persona is a STRING, buildPrompt expects tone.systemPrompt
+tone text present in prompt: false
+
+--- prompt head (300 chars) ---
+"You are acting as Test Persona.\n  Tone guidelines:\n  \n\n  Common phrases to use (for accent, not for greetings):\n  \n  \n\n  \n  User: hello\nReply as if you are Test Persona, keeping the tone authentic, but do NOT start with greetings or generic openers. Answer the user's question directly, using your un"
+
+--- conclusion ---
+The custom persona prompt degrades to the generic template with empty Tone guidelines; see BUG-006.

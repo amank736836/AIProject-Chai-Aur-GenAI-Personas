@@ -1,0 +1,9 @@
+{
+  "$comment": "Cookie payloads the loader must survive.",
+  "payloads": [
+    { "case": "TC-060", "cookie": null, "expected": "null" },
+    { "case": "TC-061", "cookie": "not-base64||junk", "expected": "null" },
+    { "case": "TC-061", "cookie": "YWJjfGRlZg==", "expected": "null (valid base64, invalid JSON)" },
+    { "case": "TC-058", "cookie": "<valid base64 of a JSON array WITHOUT '|')>", "expected": "null today (BUG-002 format contract)" }
+  ]
+}
