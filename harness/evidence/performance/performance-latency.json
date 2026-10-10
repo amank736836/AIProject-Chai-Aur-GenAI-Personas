@@ -1,0 +1,58 @@
+{
+  "generated_at": "2026-10-07T04:11:44.607Z",
+  "base_url": "http://localhost:3000",
+  "environment": "dev server (next dev --turbopack), sandboxed single-core container",
+  "caveat": "Cold-start and network-dependent values vary; the LLM round trip is NOT measured (needs provider keys).",
+  "results": {
+    "GET / (SSR shell)": {
+      "status": 200,
+      "iterations": 15,
+      "n": 15,
+      "min_ms": 50,
+      "mean_ms": 58,
+      "p50_ms": 56,
+      "p95_ms": 72,
+      "max_ms": 72
+    },
+    "GET /data/hitesh-tone.json (static data)": {
+      "status": 404,
+      "iterations": 15,
+      "n": 15,
+      "min_ms": 43,
+      "mean_ms": 53,
+      "p50_ms": 49,
+      "p95_ms": 76,
+      "max_ms": 76
+    },
+    "POST /api/chat (validation error path)": {
+      "status": 400,
+      "iterations": 15,
+      "n": 15,
+      "min_ms": 19,
+      "mean_ms": 23,
+      "p50_ms": 22,
+      "p95_ms": 30,
+      "max_ms": 30
+    },
+    "POST /api/fetch-image (name=Hitesh)": {
+      "status": 200,
+      "iterations": 15,
+      "n": 15,
+      "min_ms": 24,
+      "mean_ms": 34,
+      "p50_ms": 32,
+      "p95_ms": 52,
+      "max_ms": 52
+    },
+    "POST /api/create-persona (missing name)": {
+      "status": 400,
+      "iterations": 15,
+      "n": 15,
+      "min_ms": 20,
+      "mean_ms": 23,
+      "p50_ms": 21,
+      "p95_ms": 30,
+      "max_ms": 30
+    }
+  }
+}

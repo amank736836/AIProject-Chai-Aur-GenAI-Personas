@@ -99,6 +99,20 @@ A modern, interactive chat app built with Next.js, featuring dynamic AI personas
 
 ## Testing
 
+### Automated & documented testing
+
+A complete test harness lives in [`harness/`](harness/README.md): project overview, architecture, requirements,
+features, test scenarios/cases/tools/data, automation suites, evidence, bugs, reports and execution results.
+Start with [`harness/README.md`](harness/README.md) or run the safe, credential-free suite against a local dev
+server:
+
+```bash
+npm run dev -- -H 0.0.0.0 -p 3000 &
+bash harness/automation/scripts/run-all.sh
+```
+
+### Manual checks
+
 - Try chatting with "HiPi", Hitesh, Piyush, or a custom persona.
 - Test @username enrichment by entering a GitHub handle.
 - Check prompt transparency and link copy/visit features.

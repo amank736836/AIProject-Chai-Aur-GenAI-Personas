@@ -1,0 +1,8 @@
+{
+  "$comment": "Histories that must be accepted as prompt context.",
+  "histories": [
+    { "case": "TC-029", "turns": [ { "role": "user", "content": "pehla sawaal" }, { "role": "assistant", "content": "pehla jawaab" } ] },
+    { "case": "TC-056", "turns": [ { "role": "user", "text": "hello" }, { "role": "compare", "hitesh": "hi", "piyush": "yo" } ] },
+    { "case": "TC-059", "turns": "60 synthetic messages generated in the test (exceeds the 4 KB cookie limit)" }
+  ]
+}

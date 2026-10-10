@@ -1,0 +1,26 @@
+
+[BUG-002] saved chat -> chatHistory=W3sicm9sZSI6InVzZXIiLCJ0ZXh0IjoiaGVsbG8ifSx7InJv... ; loadChatFromCookie() = null
+
+[BUG-003] saving Hindi text threw InvalidCharacterError: Invalid character
+
+[BUG-006] create-persona tone string honoured by buildPrompt: false
+
+[BUG-007] @handle tone found after chat route strips "@": false
+(node:4488) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/user/AIProject-Chai-Aur-GenAI-Personas/src/app/components/CookieManager.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/user/AIProject-Chai-Aur-GenAI-Personas/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+[BUG-001] POST /api/clear-history -> HTTP 404 (page.tsx sends this on beforeunload)
+
+[BUG-010] POST /api/chat with malformed JSON -> HTTP 500 (expected 400)
+
+[BUG-011] POST /api/chat with whitespace-only message -> HTTP 500 (validation did not reject it)
+
+[BUG-012] POST /api/create-persona without provider keys -> HTTP 200 body={"success":true,"tone":""}
+
+[BUG-015] Set-Cookie for name with ';' -> personaData-x;-path=/evil=%7B%22name%22%3A%22x%3B%20Path%3D%2Fevil%22%2C%22tone%22%3A%22%22%7D; Path=/; HttpOnly; SameSite=Lax; Max-Age=2592000
+
+[BUG-013] provider failure payload -> HTTP 500 body={"error":"Groq API key is missing. Pass it using the 'apiKey' parameter or the GROQ_API_KEY environment variable."}
+
+[BUG-018] fetch-image (unsplash primary is retired) -> https://ui-avatars.com/api/?name=Hitesh&background=C10020&color=fff&size=128&fon

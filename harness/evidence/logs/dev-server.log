@@ -1,0 +1,35 @@
+# dev server log (excerpt) — captured from `npm run dev -- -H 0.0.0.0 -p 3000`
+# Environment: offline sandbox (no access to fonts.googleapis.com). RUN-2026-001, 2026-10-07.
+# Full raw suite logs: ../../test-results/latest/raw/
+
+> next-llm-personas@0.1.0 dev
+> next dev --turbopack -H 0.0.0.0 -p 3000
+
+   ▲ Next.js 15.4.10 (Turbopack)
+   - Local:        http://localhost:3000
+   - Network:      http://0.0.0.0:3000
+
+ ✓ Starting...
+ ✓ Ready in 6.2s
+
+# Observed per request (repeated): next/font cannot download Geist / Geist Mono
+ ⚠ [next]/internal/font/google/geist_e531dabc.module.css
+Error while requesting resource
+There was an issue establishing a connection while requesting https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap.
+Import trace:
+  [next]/internal/font/google/geist_e531dabc.module.css
+  [next]/internal/font/google/geist_e531dabc.js
+  ./src/app/layout.tsx
+
+ ⚠ [next]/internal/font/google/geist_mono_68a01160.module.css
+next/font: warning:
+Failed to download `Geist Mono` from Google Fonts. Using fallback font instead.
+
+# API error logging (from route handlers, see src/app/api/chat/route.ts:164)
+#   console.error("API /api/chat error:", err) — emitted for TC-005 / TC-003 / TC-002 runs:
+#   [Error: Groq API key is missing. Pass it using the 'apiKey' parameter or the GROQ_API_KEY environment variable.]
+
+# NOTES
+# * In DEV the font failure is tolerated (fallback font used) — the app still serves HTTP 200.
+# * In PRODUCTION build (`npm run build`) the same network restriction is fatal:
+#   "next/font error: Failed to fetch `Geist` from Google Fonts" -> "Failed to compile." (see build.log, KI-003)

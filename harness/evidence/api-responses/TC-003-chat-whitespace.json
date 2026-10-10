@@ -1,0 +1,6 @@
+{
+  "status": 500,
+  "body": {
+    "error": "Groq API key is missing. Pass it using the 'apiKey' parameter or the GROQ_API_KEY environment variable."
+  }
+}

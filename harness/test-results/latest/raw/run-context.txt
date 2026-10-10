@@ -1,0 +1,3 @@
+base_url=http://localhost:3000
+commit=d24eb41
+node=v22.22.3

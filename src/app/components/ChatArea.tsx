@@ -1,6 +1,24 @@
 "use client";
 type PersonaTone = Record<string, unknown>;
 import React, { useState } from "react";
+
+function isThinkingText(text?: string) {
+    return !!text && /is thinking\.*$/.test(text.trim());
+}
+
+function TypingDots({ label }: { label: string }) {
+    return (
+        <span className="inline-flex items-center gap-2">
+            <span className="italic opacity-80">{label} is thinking</span>
+            <span className="inline-flex items-end gap-1" aria-hidden="true">
+                <span className="typing-dot w-1.5 h-1.5 rounded-full bg-current inline-block" />
+                <span className="typing-dot w-1.5 h-1.5 rounded-full bg-current inline-block" />
+                <span className="typing-dot w-1.5 h-1.5 rounded-full bg-current inline-block" />
+            </span>
+        </span>
+    );
+}
+
 function renderTextWithLinks(text: string) {
     const urlRegex = /(https?:\/\/[^\s]+)/g;
     const parts = text.split(urlRegex);
@@ -107,13 +125,13 @@ export default function ChatArea({
     defaultCustomImage,
 }: ChatAreaProps) {
     return (
-        <div className="relative mb-6 min-h-[320px] w-full max-w-6xl border-0 rounded-3xl p-8 bg-white/80 dark:bg-zinc-900/80 shadow-2xl backdrop-blur-2xl overflow-y-auto max-h-[60vh] glassmorphic hide-scrollbar" style={{ color: '#18181b' }} ref={chatDivRef}>
+        <div className="animate-fade-in-up relative mb-6 min-h-[320px] w-full max-w-6xl border-0 rounded-3xl p-8 bg-white/80 dark:bg-zinc-900/80 shadow-2xl backdrop-blur-2xl overflow-y-auto max-h-[60vh] glassmorphic pretty-scrollbar transition-shadow hover:shadow-[0_0_60px_-15px_rgba(99,102,241,0.45)]" style={{ color: '#18181b' }} ref={chatDivRef}>
 
             <div className="fixed right-6 bottom-32 flex flex-col gap-3 z-30">
                 {!atTop && (
                     <button
                         onClick={scrollUp}
-                        className="bg-white/80 hover:bg-white/100 text-gray-700 rounded-full shadow-lg p-2 transition-all border border-gray-200"
+                        className="btn-pop bg-white/80 hover:bg-white/100 text-gray-700 rounded-full shadow-lg p-2 transition-all border border-gray-200"
                         title="Scroll Up"
                     >
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-6 h-6">
@@ -123,7 +141,7 @@ export default function ChatArea({
                 )}
                 <button
                     onClick={() => chatEndRef.current?.scrollIntoView({ behavior: "smooth" })}
-                    className={`bg-gradient-to-br from-blue-400 to-blue-600 text-white rounded-full shadow-lg p-2 transition-all border border-blue-400 ${!atBottom ? 'animate-bounce' : ''}`}
+                    className={`btn-pop bg-gradient-to-br from-blue-400 to-blue-600 text-white rounded-full shadow-lg p-2 transition-all border border-blue-400 ${!atBottom ? 'animate-bounce' : ''}`}
                     title="Go to Latest Response"
                 >
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-6 h-6">
@@ -133,7 +151,7 @@ export default function ChatArea({
                 {!atBottom && (
                     <button
                         onClick={scrollDown}
-                        className="bg-white/80 hover:bg-white/100 text-gray-700 rounded-full shadow-lg p-2 transition-all border border-gray-200"
+                        className="btn-pop bg-white/80 hover:bg-white/100 text-gray-700 rounded-full shadow-lg p-2 transition-all border border-gray-200"
                         title="Scroll Down"
                     >
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-6 h-6">
@@ -145,17 +163,26 @@ export default function ChatArea({
             {persona === "custom" && !customReady ? (
                 <div className="text-center text-gray-500">
                     {creatingPersona ? (
-                        <span className="text-lg font-semibold animate-pulse">Creating persona for <b className="text-green-700">{customName}</b>... Please wait.</span>
+                        <div className="flex flex-col items-center gap-3 py-6">
+                            <span className="relative inline-flex h-10 w-10">
+                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-60"></span>
+                                <span className="relative inline-flex rounded-full h-10 w-10 bg-gradient-to-br from-green-400 to-emerald-500"></span>
+                            </span>
+                            <span className="text-lg font-semibold">Creating persona for <b className="text-green-700">{customName}</b>... Please wait.</span>
+                        </div>
                     ) : null}
                 </div>
             ) : chat.length === 0 ? (
-                <div className="text-gray-600 dark:text-gray-300 text-center text-lg font-semibold">Start the conversation!</div>
+                <div className="flex flex-col items-center justify-center gap-3 text-gray-600 dark:text-gray-300 text-center text-lg font-semibold py-10">
+                    <span className="animate-float-y text-4xl" aria-hidden="true">💬</span>
+                    <span>Start the conversation!</span>
+                </div>
             ) : (
                 chat.map((c, i) => {
                     if (c.role === "user") {
                         return (
-                            <div key={i} className="flex items-start gap-2 mb-2">
-                                <p className="text-blue-900 dark:text-blue-200 bg-white/90 dark:bg-blue-900/70 rounded-2xl px-5 py-3 shadow-md max-w-2xl font-medium backdrop-blur-md text-base leading-relaxed" style={{ wordBreak: 'break-word' }}>
+                            <div key={i} className="animate-fade-in-up flex items-start gap-2 mb-2 justify-end">
+                                <p className="text-blue-900 dark:text-blue-200 bg-white/90 dark:bg-blue-900/70 rounded-2xl px-5 py-3 shadow-md hover:shadow-xl transition-shadow max-w-2xl font-medium backdrop-blur-md text-base leading-relaxed" style={{ wordBreak: 'break-word' }}>
                                     <span className="font-bold">👤 You:</span> {c.text}
                                 </p>
                             </div>
@@ -164,50 +191,50 @@ export default function ChatArea({
 
                         const isLast = i === chat.length - 1;
                         return (
-                            <div key={i} className="flex flex-col md:flex-row gap-6 mb-6">
+                            <div key={i} className="animate-fade-in-up flex flex-col md:flex-row gap-6 mb-6">
                                 {persona === "both" ? (
                                     <>
-                                        <div className="flex-1 bg-gradient-to-br from-blue-300/80 via-cyan-100/80 to-blue-100/90 dark:from-blue-900/80 dark:via-blue-800/70 dark:to-cyan-900/80 rounded-2xl p-4 flex items-start gap-3 border-2 border-blue-400 shadow-2xl backdrop-blur-xl ring-1 ring-blue-300/40">
+                                        <div className="flex-1 bg-gradient-to-br from-blue-300/80 via-cyan-100/80 to-blue-100/90 dark:from-blue-900/80 dark:via-blue-800/70 dark:to-cyan-900/80 rounded-2xl p-4 flex items-start gap-3 border-2 border-blue-400 shadow-2xl backdrop-blur-xl ring-1 ring-blue-300/40 transition-transform duration-300 hover:-translate-y-1 hover:shadow-[0_12px_40px_-10px_rgba(59,130,246,0.55)]">
                                             <img src={personaImages.hitesh} alt="Hitesh Choudhary" className="w-10 h-10 rounded-full border-2 border-blue-400 object-cover bg-white shadow" />
                                             <div>
                                                 <b className="text-blue-900 dark:text-blue-200 text-lg">Hitesh:</b>
-                                                <span className="text-green-800 dark:text-green-300 ml-2 font-semibold text-base leading-relaxed break-words selection:bg-blue-200 selection:text-blue-900">{c.hitesh && renderTextWithLinks(c.hitesh)}</span>
+                                                <span className="text-green-800 dark:text-green-300 ml-2 font-semibold text-base leading-relaxed break-words selection:bg-blue-200 selection:text-blue-900">{isThinkingText(c.hitesh) ? <TypingDots label="Hitesh" /> : (c.hitesh && renderTextWithLinks(c.hitesh))}</span>
                                             </div>
                                         </div>
-                                        <div className="flex-1 bg-gradient-to-br from-purple-300/80 via-pink-100/80 to-purple-100/90 dark:from-purple-900/80 dark:via-purple-800/70 dark:to-pink-900/80 rounded-2xl p-4 flex items-start gap-3 border-2 border-purple-400 shadow-2xl backdrop-blur-xl ring-1 ring-purple-300/40">
+                                        <div className="flex-1 bg-gradient-to-br from-purple-300/80 via-pink-100/80 to-purple-100/90 dark:from-purple-900/80 dark:via-purple-800/70 dark:to-pink-900/80 rounded-2xl p-4 flex items-start gap-3 border-2 border-purple-400 shadow-2xl backdrop-blur-xl ring-1 ring-purple-300/40 transition-transform duration-300 hover:-translate-y-1 hover:shadow-[0_12px_40px_-10px_rgba(168,85,247,0.55)]">
                                             <img src={personaImages.piyush} alt="Piyush Garg" className="w-10 h-10 rounded-full border-2 border-purple-400 object-cover bg-white shadow" />
                                             <div>
                                                 <b className="text-purple-900 dark:text-purple-200 text-lg">Piyush:</b>
-                                                <span className="text-green-800 dark:text-green-300 ml-2 font-semibold text-base leading-relaxed break-words selection:bg-purple-200 selection:text-purple-900">{c.piyush && renderTextWithLinks(c.piyush)}</span>
+                                                <span className="text-green-800 dark:text-green-300 ml-2 font-semibold text-base leading-relaxed break-words selection:bg-purple-200 selection:text-purple-900">{isThinkingText(c.piyush) ? <TypingDots label="Piyush" /> : (c.piyush && renderTextWithLinks(c.piyush))}</span>
                                             </div>
                                         </div>
                                     </>
                                 ) : <>
                                     {persona === "hitesh" && (
-                                        <div ref={isLast ? firstAIResponseRef : undefined} className="flex-1 bg-gradient-to-br from-blue-300/80 via-cyan-100/80 to-blue-100/90 dark:from-blue-900/80 dark:via-blue-800/70 dark:to-cyan-900/80 rounded-2xl p-4 flex items-start gap-3 border-2 border-blue-400 shadow-2xl backdrop-blur-xl ring-1 ring-blue-300/40">
+                                        <div ref={isLast ? firstAIResponseRef : undefined} className="flex-1 bg-gradient-to-br from-blue-300/80 via-cyan-100/80 to-blue-100/90 dark:from-blue-900/80 dark:via-blue-800/70 dark:to-cyan-900/80 rounded-2xl p-4 flex items-start gap-3 border-2 border-blue-400 shadow-2xl backdrop-blur-xl ring-1 ring-blue-300/40 transition-transform duration-300 hover:-translate-y-1 hover:shadow-[0_12px_40px_-10px_rgba(59,130,246,0.55)]">
                                             <img src={personaImages.hitesh} alt="Hitesh Choudhary" className="w-10 h-10 rounded-full border-2 border-blue-400 object-cover bg-white shadow" />
                                             <div>
                                                 <b className="text-blue-900 dark:text-blue-200 text-lg">Hitesh:</b>
-                                                <span className="text-green-800 dark:text-green-300 ml-2 font-semibold text-base leading-relaxed break-words selection:bg-blue-200 selection:text-blue-900">{c.hitesh && renderTextWithLinks(c.hitesh)}</span>
+                                                <span className="text-green-800 dark:text-green-300 ml-2 font-semibold text-base leading-relaxed break-words selection:bg-blue-200 selection:text-blue-900">{isThinkingText(c.hitesh) ? <TypingDots label="Hitesh" /> : (c.hitesh && renderTextWithLinks(c.hitesh))}</span>
                                             </div>
                                         </div>
                                     )}
                                     {persona === "piyush" && (
-                                        <div className="flex-1 bg-gradient-to-br from-purple-300/80 via-pink-100/80 to-purple-100/90 dark:from-purple-900/80 dark:via-purple-800/70 dark:to-pink-900/80 rounded-2xl p-4 flex items-start gap-3 border-2 border-purple-400 shadow-2xl backdrop-blur-xl ring-1 ring-purple-300/40">
+                                        <div className="flex-1 bg-gradient-to-br from-purple-300/80 via-pink-100/80 to-purple-100/90 dark:from-purple-900/80 dark:via-purple-800/70 dark:to-pink-900/80 rounded-2xl p-4 flex items-start gap-3 border-2 border-purple-400 shadow-2xl backdrop-blur-xl ring-1 ring-purple-300/40 transition-transform duration-300 hover:-translate-y-1 hover:shadow-[0_12px_40px_-10px_rgba(168,85,247,0.55)]">
                                             <img src={personaImages.piyush} alt="Piyush Garg" className="w-10 h-10 rounded-full border-2 border-purple-400 object-cover bg-white shadow" />
                                             <div>
                                                 <b className="text-purple-900 dark:text-purple-200 text-lg">Piyush:</b>
-                                                <span className="text-green-800 dark:text-green-300 ml-2 font-semibold text-base leading-relaxed break-words selection:bg-purple-200 selection:text-purple-900">{c.piyush && renderTextWithLinks(c.piyush)}</span>
+                                                <span className="text-green-800 dark:text-green-300 ml-2 font-semibold text-base leading-relaxed break-words selection:bg-purple-200 selection:text-purple-900">{isThinkingText(c.piyush) ? <TypingDots label="Piyush" /> : (c.piyush && renderTextWithLinks(c.piyush))}</span>
                                             </div>
                                         </div>
                                     )}
                                 </>}
                                 {persona === "custom" && customName && c[customName] && (
-                                    <div ref={isLast ? firstAIResponseRef : undefined} className="flex-1 bg-gradient-to-br from-green-300/80 via-lime-100/80 to-green-100/90 dark:from-green-900/80 dark:via-green-800/70 dark:to-lime-900/80 rounded-2xl p-4 flex items-start gap-3 border-2 border-green-400 shadow-2xl backdrop-blur-xl ring-1 ring-green-300/40">
+                                    <div ref={isLast ? firstAIResponseRef : undefined} className="flex-1 bg-gradient-to-br from-green-300/80 via-lime-100/80 to-green-100/90 dark:from-green-900/80 dark:via-green-800/70 dark:to-lime-900/80 rounded-2xl p-4 flex items-start gap-3 border-2 border-green-400 shadow-2xl backdrop-blur-xl ring-1 ring-green-300/40 transition-transform duration-300 hover:-translate-y-1 hover:shadow-[0_12px_40px_-10px_rgba(34,197,94,0.55)]">
                                         <img src={customImage} alt={customName} className="w-10 h-10 rounded-full border-2 border-green-400 object-cover bg-white shadow" onError={e => { (e.target as HTMLImageElement).src = defaultCustomImage; }} />
                                         <div>
                                             <b className="text-green-900 dark:text-green-200 text-lg">{customName}:</b>
-                                            <span className="text-green-800 dark:text-green-300 ml-2 font-semibold text-base leading-relaxed break-words selection:bg-green-200 selection:text-green-900">{c[customName] && renderTextWithLinks(c[customName])}</span>
+                                            <span className="text-green-800 dark:text-green-300 ml-2 font-semibold text-base leading-relaxed break-words selection:bg-green-200 selection:text-green-900">{isThinkingText(c[customName]) ? <TypingDots label={customName} /> : (c[customName] && renderTextWithLinks(c[customName]))}</span>
                                         </div>
                                     </div>
                                 )}

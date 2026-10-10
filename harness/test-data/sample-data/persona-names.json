@@ -1,0 +1,14 @@
+{
+  "$comment": "Persona identifiers used across suites. @amank736836 is the maintainer handle published in the project README (public data).",
+  "built_in": ["hitesh", "piyush", "both"],
+  "custom_valid": ["Test Persona", "Harness Probe", "Harness Reuse", "@amank736836"],
+  "custom_invalid": ["", "   ", null],
+  "custom_adversarial": ["x; Path=/evil", ".*", "a=b", "[a-", "🧑‍💻"],
+  "slugs": {
+    "Test Persona": "test-persona",
+    "Harness Probe": "harness-probe",
+    "Harness Reuse": "harness-reuse",
+    "@amank736836": "@amank736836",
+    "$note": "slug = name.toLowerCase().replace(/\\s+/g,'-') per BR-003; the '@' is NOT stripped for the cookie name (BUG-007)"
+  }
+}

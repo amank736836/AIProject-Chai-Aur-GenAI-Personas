@@ -1,0 +1,348 @@
+TAP version 13
+# Subtest: TC-054 [app-endpoints] POST /api/clear-history exists for the unload beacon (BUG-001)
+not ok 1 - TC-054 [app-endpoints] POST /api/clear-history exists for the unload beacon (BUG-001) # TODO BUG-001
+  ---
+  duration_ms: 81.294946
+  type: 'test'
+  location: '/home/user/AIProject-Chai-Aur-GenAI-Personas/harness/automation/api/app-endpoints.api.test.mjs:12:1'
+  failureType: 'testCodeFailure'
+  error: 'page.tsx sends this beacon on every unload, but HTTP 404 is returned'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: '=='
+  stack: |-
+    TestContext.<anonymous> (file:///home/user/AIProject-Chai-Aur-GenAI-Personas/harness/automation/api/app-endpoints.api.test.mjs:15:10)
+    process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async startSubtestAfterBootstrap (node:internal/test_runner/harness:296:3)
+  ...
+# Subtest: TC-001 [api-chat] POST /api/chat without message -> 400 Message required
+ok 2 - TC-001 [api-chat] POST /api/chat without message -> 400 Message required
+  ---
+  duration_ms: 66.70692
+  type: 'test'
+  ...
+# Subtest: TC-002 [api-chat] malformed JSON body -> 400 expected (BUG-010: currently 500)
+not ok 3 - TC-002 [api-chat] malformed JSON body -> 400 expected (BUG-010: currently 500) # TODO BUG-010
+  ---
+  duration_ms: 208.739172
+  type: 'test'
+  location: '/home/user/AIProject-Chai-Aur-GenAI-Personas/harness/automation/api/chat.api.test.mjs:20:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    
+    500 !== 400
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 400
+  actual: 500
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///home/user/AIProject-Chai-Aur-GenAI-Personas/harness/automation/api/chat.api.test.mjs:23:10)
+    process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: TC-003 [api-chat] whitespace-only message -> 400 expected (BUG-011: currently forwarded to provider)
+not ok 4 - TC-003 [api-chat] whitespace-only message -> 400 expected (BUG-011: currently forwarded to provider) # TODO BUG-011
+  ---
+  duration_ms: 218.839259
+  type: 'test'
+  location: '/home/user/AIProject-Chai-Aur-GenAI-Personas/harness/automation/api/chat.api.test.mjs:26:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    
+    500 !== 400
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 400
+  actual: 500
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///home/user/AIProject-Chai-Aur-GenAI-Personas/harness/automation/api/chat.api.test.mjs:29:10)
+    process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: TC-004 [api-chat] GET /api/chat -> 405 Method Not Allowed
+ok 5 - TC-004 [api-chat] GET /api/chat -> 405 Method Not Allowed
+  ---
+  duration_ms: 26.014965
+  type: 'test'
+  ...
+# Subtest: TC-005 [api-chat] provider failure returns a generic 5xx payload (BUG-013: raw provider text leaked)
+not ok 6 - TC-005 [api-chat] provider failure returns a generic 5xx payload (BUG-013: raw provider text leaked) # TODO BUG-013
+  ---
+  duration_ms: 150.892147
+  type: 'test'
+  location: '/home/user/AIProject-Chai-Aur-GenAI-Personas/harness/automation/api/chat.api.test.mjs:37:1'
+  failureType: 'testCodeFailure'
+  error: "provider internals leaked: Groq API key is missing. Pass it using the 'apiKey' parameter or the GROQ_API_KEY environment variable."
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: '=='
+  stack: |-
+    TestContext.<anonymous> (file:///home/user/AIProject-Chai-Aur-GenAI-Personas/harness/automation/api/chat.api.test.mjs:42:10)
+    process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: TC-006 [api-chat] oversized body (>50 KB) is not rejected at the edge (documented risk)
+ok 7 - TC-006 [api-chat] oversized body (>50 KB) is not rejected at the edge (documented risk)
+  ---
+  duration_ms: 158.336271
+  type: 'test'
+  ...
+# Subtest: TC-007 [api-chat] happy path (hitesh) returns reply + history + history cookie
+ok 8 - TC-007 [api-chat] happy path (hitesh) returns reply + history + history cookie # SKIP GROQ_API_KEY/GOOGLE_GENERATIVE_AI_API_KEY not set
+  ---
+  duration_ms: 0.259301
+  type: 'test'
+  ...
+# Subtest: TC-008 [api-chat] HiPi mode returns both replies
+ok 9 - TC-008 [api-chat] HiPi mode returns both replies # SKIP provider keys not set
+  ---
+  duration_ms: 0.158265
+  type: 'test'
+  ...
+# Subtest: TC-009 [api-chat] piyush mode leaves hitesh reply null
+ok 10 - TC-009 [api-chat] piyush mode leaves hitesh reply null # SKIP provider keys not set
+  ---
+  duration_ms: 0.209197
+  type: 'test'
+  ...
+# Subtest: TC-010 [api-chat] rate-limit/overload surfaces HTTP 429 with rateLimit flag
+ok 11 - TC-010 [api-chat] rate-limit/overload surfaces HTTP 429 with rateLimit flag # SKIP provider keys not set
+  ---
+  duration_ms: 0.363937
+  type: 'test'
+  ...
+# Subtest: TC-015 [create-persona] missing name -> 400 Name required
+ok 12 - TC-015 [create-persona] missing name -> 400 Name required
+  ---
+  duration_ms: 38.306019
+  type: 'test'
+  ...
+# Subtest: TC-016 [create-persona] malformed JSON body -> 400 expected (BUG-010: currently 500)
+not ok 13 - TC-016 [create-persona] malformed JSON body -> 400 expected (BUG-010: currently 500) # TODO BUG-010
+  ---
+  duration_ms: 91.446687
+  type: 'test'
+  location: '/home/user/AIProject-Chai-Aur-GenAI-Personas/harness/automation/api/create-persona.api.test.mjs:20:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    
+    500 !== 400
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 400
+  actual: 500
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///home/user/AIProject-Chai-Aur-GenAI-Personas/harness/automation/api/create-persona.api.test.mjs:23:10)
+    process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: TC-017 [create-persona] provider failure must not be reported as success (BUG-012)
+not ok 14 - TC-017 [create-persona] provider failure must not be reported as success (BUG-012) # TODO BUG-012
+  ---
+  duration_ms: 35.300247
+  type: 'test'
+  location: '/home/user/AIProject-Chai-Aur-GenAI-Personas/harness/automation/api/create-persona.api.test.mjs:26:1'
+  failureType: 'testCodeFailure'
+  error: 'a failed tone generation was reported as success:true with an empty tone'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: ''
+  operator: '=='
+  stack: |-
+    TestContext.<anonymous> (file:///home/user/AIProject-Chai-Aur-GenAI-Personas/harness/automation/api/create-persona.api.test.mjs:34:12)
+    process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: TC-018 [create-persona] writes HttpOnly personaData-<slug> cookie with sanitised attributes
+ok 15 - TC-018 [create-persona] writes HttpOnly personaData-<slug> cookie with sanitised attributes
+  ---
+  duration_ms: 26.180622
+  type: 'test'
+  ...
+# Subtest: TC-019 [create-persona] cookie name is not sanitised against ';' (BUG-015)
+not ok 16 - TC-019 [create-persona] cookie name is not sanitised against ';' (BUG-015) # TODO BUG-015
+  ---
+  duration_ms: 23.835498
+  type: 'test'
+  location: '/home/user/AIProject-Chai-Aur-GenAI-Personas/harness/automation/api/create-persona.api.test.mjs:51:1'
+  failureType: 'testCodeFailure'
+  error: "cookie name contains ';': personaData-x;-path=/evil=%7B%22name%22%3A%22x%3B%20Path%3D%2Fevil%22%2C%22tone%22%3A%22%22%7D; Path=/; HttpOnly; SameSite=Lax; Max-Age=2592000"
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: '=='
+  stack: |-
+    TestContext.<anonymous> (file:///home/user/AIProject-Chai-Aur-GenAI-Personas/harness/automation/api/create-persona.api.test.mjs:55:10)
+    process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: TC-021 [create-persona] existing tone cookie short-circuits tone generation (no LLM call)
+ok 17 - TC-021 [create-persona] existing tone cookie short-circuits tone generation (no LLM call)
+  ---
+  duration_ms: 30.53181
+  type: 'test'
+  ...
+# Subtest: TC-020 [create-persona] @handle enrichment produces a non-empty tone
+ok 18 - TC-020 [create-persona] @handle enrichment produces a non-empty tone # SKIP provider keys not set
+  ---
+  duration_ms: 0.178229
+  type: 'test'
+  ...
+# Subtest: TC-022 [fetch-image] missing name -> 400 Name required
+ok 19 - TC-022 [fetch-image] missing name -> 400 Name required
+  ---
+  duration_ms: 37.247335
+  type: 'test'
+  ...
+# Subtest: TC-023 [fetch-image] valid name -> 200 with absolute https image URL
+ok 20 - TC-023 [fetch-image] valid name -> 200 with absolute https image URL
+  ---
+  duration_ms: 37.376101
+  type: 'test'
+  ...
+# Subtest: TC-024 [fetch-image] malformed JSON body -> 400 expected (BUG-010: currently 500)
+not ok 21 - TC-024 [fetch-image] malformed JSON body -> 400 expected (BUG-010: currently 500) # TODO BUG-010
+  ---
+  duration_ms: 102.326826
+  type: 'test'
+  location: '/home/user/AIProject-Chai-Aur-GenAI-Personas/harness/automation/api/fetch-image.api.test.mjs:26:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    
+    500 !== 400
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 400
+  actual: 500
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///home/user/AIProject-Chai-Aur-GenAI-Personas/harness/automation/api/fetch-image.api.test.mjs:29:10)
+    process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: TC-026 [fetch-image] primary upstream (source.unsplash.com) is retired -> fallback always used (BUG-018)
+ok 22 - TC-026 [fetch-image] primary upstream (source.unsplash.com) is retired -> fallback always used (BUG-018) # TODO BUG-018
+  ---
+  duration_ms: 114.25555
+  type: 'test'
+  ...
+# Subtest: TC-025 [fetch-image] returned image URL is downloadable (requires outbound internet)
+ok 23 - TC-025 [fetch-image] returned image URL is downloadable (requires outbound internet) # SKIP requires network access to the image host
+  ---
+  duration_ms: 0.237048
+  type: 'test'
+  ...
+# Subtest: TC-064 [security] API routes are reachable without any authentication (documented risk RISK-001)
+ok 24 - TC-064 [security] API routes are reachable without any authentication (documented risk RISK-001)
+  ---
+  duration_ms: 34.440782
+  type: 'test'
+  ...
+# Subtest: TC-065 [security] no rate limiting: 20 rapid POSTs are all processed (RISK-002)
+ok 25 - TC-065 [security] no rate limiting: 20 rapid POSTs are all processed (RISK-002)
+  ---
+  duration_ms: 435.648273
+  type: 'test'
+  ...
+# Subtest: TC-066 [security] cross-origin browser POST is not granted CORS access
+ok 26 - TC-066 [security] cross-origin browser POST is not granted CORS access
+  ---
+  duration_ms: 22.08438
+  type: 'test'
+  ...
+# Subtest: TC-067 [security] CORS preflight does not grant wildcard access
+ok 27 - TC-067 [security] CORS preflight does not grant wildcard access
+  ---
+  duration_ms: 20.998609
+  type: 'test'
+  ...
+# Subtest: TC-068 [security] generic error payload (BUG-013: provider internals are returned)
+not ok 28 - TC-068 [security] generic error payload (BUG-013: provider internals are returned) # TODO BUG-013
+  ---
+  duration_ms: 148.942304
+  type: 'test'
+  location: '/home/user/AIProject-Chai-Aur-GenAI-Personas/harness/automation/api/security.api.test.mjs:46:1'
+  failureType: 'testCodeFailure'
+  error: `env var names leaked: {"error":"Groq API key is missing. Pass it using the 'apiKey' parameter or the GROQ_API_KEY environment variable."}`
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: '=='
+  stack: |-
+    TestContext.<anonymous> (file:///home/user/AIProject-Chai-Aur-GenAI-Personas/harness/automation/api/security.api.test.mjs:50:10)
+    process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: TC-069 [security] no provider keys or .env files committed to the repository
+ok 29 - TC-069 [security] no provider keys or .env files committed to the repository
+  ---
+  duration_ms: 3.906014
+  type: 'test'
+  ...
+# Subtest: TC-075 [security] security headers on / are recorded (RISK-003: no CSP/HSTS/XCTO configured)
+not ok 30 - TC-075 [security] security headers on / are recorded (RISK-003: no CSP/HSTS/XCTO configured) # TODO RISK-003
+  ---
+  duration_ms: 61.727192
+  type: 'test'
+  location: '/home/user/AIProject-Chai-Aur-GenAI-Personas/harness/automation/api/security.api.test.mjs:74:1'
+  failureType: 'testCodeFailure'
+  error: 'no Content-Security-Policy header configured'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: ~
+  operator: '=='
+  stack: |-
+    TestContext.<anonymous> (file:///home/user/AIProject-Chai-Aur-GenAI-Personas/harness/automation/api/security.api.test.mjs:83:10)
+    process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: TC-071 [security] user input is appended to the LLM prompt verbatim (prompt-injection surface, KNOWN LIMITATION)
+ok 31 - TC-071 [security] user input is appended to the LLM prompt verbatim (prompt-injection surface, KNOWN LIMITATION)
+  ---
+  duration_ms: 4.292528
+  type: 'test'
+  ...
+# Subtest: TC-082 [security] repository ignores secret-bearing paths (.env*, node_modules, .next)
+ok 32 - TC-082 [security] repository ignores secret-bearing paths (.env*, node_modules, .next)
+  ---
+  duration_ms: 0.798638
+  type: 'test'
+  ...
+1..32
+# tests 32
+# suites 0
+# pass 15
+# fail 0
+# cancelled 0
+# skipped 6
+# todo 11
+# duration_ms 2991.394738

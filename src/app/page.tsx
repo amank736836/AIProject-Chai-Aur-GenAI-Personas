@@ -293,9 +293,16 @@ export default function Home() {
   }
 
   return (
-    <div className="w-full min-h-screen flex flex-col items-center justify-center font-sans bg-gradient-to-br from-[#a1c4fd] via-[#c2e9fb] to-[#fbc2eb] dark:from-gray-900 dark:to-gray-800 transition-all">
+    <div className="relative w-full min-h-screen flex flex-col items-center justify-center font-sans bg-gradient-to-br from-[#a1c4fd] via-[#c2e9fb] to-[#fbc2eb] dark:from-gray-900 dark:to-gray-800 transition-all overflow-hidden px-4 py-10">
+      {/* Ambient animated background blobs */}
+      <div className="pointer-events-none absolute inset-0 overflow-hidden -z-10">
+        <div className="absolute -top-16 -left-16 w-72 h-72 md:w-96 md:h-96 bg-fuchsia-400/40 dark:bg-fuchsia-600/20 rounded-full mix-blend-multiply dark:mix-blend-screen blur-3xl animate-blob" />
+        <div className="absolute top-20 -right-10 w-72 h-72 md:w-96 md:h-96 bg-sky-400/40 dark:bg-sky-600/20 rounded-full mix-blend-multiply dark:mix-blend-screen blur-3xl animate-blob animation-delay-2000" />
+        <div className="absolute -bottom-20 left-1/3 w-72 h-72 md:w-96 md:h-96 bg-emerald-400/40 dark:bg-emerald-600/20 rounded-full mix-blend-multiply dark:mix-blend-screen blur-3xl animate-blob animation-delay-4000" />
+      </div>
+
       <h1
-        className="text-6xl md:text-7xl font-black mb-10 text-center bg-clip-text text-transparent bg-gradient-to-r from-fuchsia-500 via-sky-400 to-emerald-400 animate-gradient-x drop-shadow-[0_4px_32px_rgba(99,102,241,0.25)] tracking-tight select-none relative"
+        className="animate-fade-in-down text-5xl sm:text-6xl md:text-7xl font-black mb-10 text-center bg-clip-text text-transparent bg-gradient-to-r from-fuchsia-500 via-sky-400 to-emerald-400 animate-gradient-x drop-shadow-[0_4px_32px_rgba(99,102,241,0.25)] tracking-tight select-none relative"
         style={{
           WebkitTextStroke: '2px #fff',
           textShadow: '0 2px 24px #a5b4fc, 0 1px 0 #fff',

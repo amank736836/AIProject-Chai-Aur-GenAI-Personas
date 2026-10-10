@@ -1,0 +1,8 @@
+{
+  "$comment": "Unicode transcript used by TC-057 (BUG-003) and TC-038.",
+  "chat": [
+    { "role": "user", "text": "बताओ क्या हाल है?" },
+    { "role": "compare", "hitesh": "हाँजी, चाय पीते हैं!", "piyush": "All good — let's code." }
+  ],
+  "expected": "Saving this transcript must not throw and must round-trip; today btoa throws InvalidCharacterError (BUG-003)."
+}

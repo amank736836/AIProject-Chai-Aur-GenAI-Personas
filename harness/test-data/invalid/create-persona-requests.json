@@ -1,0 +1,9 @@
+{
+  "$comment": "create-persona requests that must not create a usable persona.",
+  "requests": [
+    { "case": "TC-015", "body": {}, "expected": "400 Name required" },
+    { "case": "TC-015", "body": { "name": "" }, "expected": "400 Name required" },
+    { "case": "TC-016", "raw": "}", "expected": "400 with JSON error", "actual": "500 empty body (BUG-010)" },
+    { "case": "TC-017", "body": { "name": "Harness Probe" }, "expected": "error status or documented degradation when the provider is down", "actual": "200 success:true tone:'' (BUG-012)" }
+  ]
+}
